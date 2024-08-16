@@ -57,7 +57,6 @@ call plug#begin('~/.vim/plugged')
 
 call plug#end()
 
-" Navigation
 nnoremap <c-down> <c-w>j
 nnoremap <c-up> <c-w>k
 nnoremap <c-left> <c-w>h
@@ -95,3 +94,4 @@ inoremap <silent><expr> <c-@> coc#refresh()
 " Use /rn for renaming
 nmap <leader>rn <Plug>(coc-rename)
 
+nnoremap <c-c> :q! <CR>
