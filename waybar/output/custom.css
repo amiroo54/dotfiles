@@ -1,3 +1,10 @@
+/*
+You can type here any CSS rule recognized by GTK+.
+You can temporarily disable this custom CSS by clicking on the “Pause” button above.
+
+Changes are applied instantly and globally, for the whole application.
+*/
+
 * {
 	border: none;
 	border-radius: 4px;
@@ -14,7 +21,7 @@ window#waybar.hidden {
 	opacity: 0.2;
 }
 
-#network, #pulseaudio, #cpu, #memory, #temperature, #tray, #power-profiles-daemon {
+#network, #pulseaudio, #cpu, #memory, #temperature, #tray {
 	margin-top: 8px;
 	margin-left: 8px;
 	padding-left: 16px;
@@ -23,7 +30,7 @@ window#waybar.hidden {
 	border-radius: 26px;
 	transition: none;
 	color: #A0D2E7;
-	background: #0F086B;
+	background: #fff59c;
 }
 
 #window {
@@ -69,5 +76,5 @@ window#waybar.hidden {
 #tray {
 	margin-left: 8px;
 	margin-right: 8px;
-	background: #1666ba;
+	background: #eb1d4e;
 }*/

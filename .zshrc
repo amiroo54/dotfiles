@@ -108,7 +108,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias unityhub="sudo dnsch 403 && unityhub"
+alias pip="bin/pip"
+alias discord="http_proxy=socks5://127.0.0.1:12334 https_proxy=socks5://127.0.0.1:12334 /opt/discord/Discord --proxy-server=\"socks5://127.0.0.1:12334\""
+alias av1="av1an -a \"-c:a flac\" -i "
 
+alias virtmix="pactl load-module module-null-sink media.class=Audio/Sink sink_name=Virtual-Mic channel_map=front-left,front-right; pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=Virtual-Mic channel_map=front-left,front-right; pw-link Virtual-Mic:monitor_FL Virtual-Mic:input_FL; pw-link Virtual-Mic:monitor_FR Virtual-Mic:input_FR"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

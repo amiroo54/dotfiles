@@ -1,7 +1,7 @@
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
-" Enable type file detection. Vim will be able to try to detect the type of file in use.
+" Enable filetype detection.
 filetype on
 
 " Enable plugins and load plugin for the detected file type.
@@ -37,10 +37,8 @@ set incsearch
 " Ignore capital letters during search.
 set ignorecase
 
-" Enable auto completion menu after pressing TAB.
-set wildmenu
-
-" Always show the signcolumn, otherwise it would shift the text each time
+" Show the numbers and the signs in the same column
+set number
 set signcolumn=number
 
 " Make wildmenu behave like similar to Bash completion.
@@ -50,48 +48,35 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+" Initialize plugin manager
 call plug#begin('~/.vim/plugged')
 
-	Plug 'preservim/nerdtree'
-	Plug 'neoclide/coc.nvim'
-
+    " Plugins
+    Plug 'preservim/nerdtree'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    
+    " Vue.js support
+    Plug 'neoclide/coc-vetur'
+    
+    " Rust support
+    Plug 'neoclide/coc-rls'
+    
 call plug#end()
 
-nnoremap <c-down> <c-w>j
-nnoremap <c-up> <c-w>k
-nnoremap <c-left> <c-w>h
-nnoremap <c-right> <c-w>l
-
-" Window Resize
-nnoremap <c-j> <c-w>v
-nnoremap <c-k> <c-w>s
-
-nnoremap <c--> <c-w>-
-nnoremap <c-=> <c-w>=
-nnoremap <c-_> <c-w>>
-nnoremap <c-+> <c-w><
-
-" HOW DO I EXIT VIM
-nnoremap <c-c> :q! <CR>
-
-" It's a force of habbit
-nnoremap <c-s> :w <CR>
-
-" Nerdtree
+" NERDTree
 nnoremap <c-e> :NERDTreeToggle<CR>
 nnoremap <c-f> :NERDTreeFind<CR>
 
-" COC
-" Using tab for complreting
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-" IDK what this does for now
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-" Ctrl + Space for triggering completion
-inoremap <silent><expr> <c-@> coc#refresh()
-" Use /rn for renaming
-nmap <leader>rn <Plug>(coc-rename)
+" Coc.nvim mappings
+nmap <silent> [c <Plug>(coc-definition)
+nmap <silent> ]c <Plug>(coc-references)
 
-nnoremap <c-c> :q! <CR>
+" Auto-completion triggers
+set completeopt=menuone,noinsert,noselect
+
+" Map <C-Space> to trigger completion with the currently selected item
+inoremap <silent><expr> <C-Space> pumvisible() ? "\<C-n>" :
+      \ CocAction('showCompletionItemMenu')
+
+" Exit Vim
+nnoremap <leader>q :q!<CR>
