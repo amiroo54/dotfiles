@@ -111,8 +111,9 @@ alias unityhub="sudo dnsch 403 && unityhub"
 alias pip="bin/pip"
 alias discord="http_proxy=socks5://127.0.0.1:12334 https_proxy=socks5://127.0.0.1:12334 /opt/discord/Discord --proxy-server=\"socks5://127.0.0.1:12334\""
 alias av1="av1an -a \"-c:a flac\" -i "
-
+alias inquisition="for file in ./*.mkv; do ffmpeg -i \"\$file\" -c:v dnxhd -pix_fmt yuv422p -vf scale=1920:1080 -b:v 90M -map 0:v -map 0:a -c:a copy \"\$file\".mov; done"
 alias virtmix="pactl load-module module-null-sink media.class=Audio/Sink sink_name=Virtual-Mic channel_map=front-left,front-right; pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=Virtual-Mic channel_map=front-left,front-right; pw-link Virtual-Mic:monitor_FL Virtual-Mic:input_FL; pw-link Virtual-Mic:monitor_FR Virtual-Mic:input_FR"
+alias unityhub='http_proxy=socks5://127.0.0.1:12334 https_proxy=socks5://127.0.0.1:12334 /opt/unityhub/unityhub --proxy-server="socks5://127.0.0.1:12334"'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

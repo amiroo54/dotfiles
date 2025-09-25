@@ -17,15 +17,14 @@ $fileManager = konsole -e yazi
 $menu = rofi -show drun
 $switchkeyboard = hyprctl switchxkblayout sigmachip-usb-keyboard next
 $screenshot = grim -g "$(slurp -d)" - | wl-copy
-$screenprint = grim - | wl-copy
+
 #################
 ### AUTOSTART ###
 #################
 
 exec-once = gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic 
-exec-once = hyprpaper & waybar & hypridle & dunst & bongocat
-exec-once = /home/amiroof/Repos/5etools-src/run.sh	
-exec-once = [workspace 2 silent] Telegram
+exec-once = hyprpaper & waybar & hypridle
+exec-once = [workspace 2 silent] telegram-desktop
 exec-once = systemctl --user start plasma-polkit-agent
 
 # Setting the main monitor
@@ -80,9 +79,18 @@ decoration {
     rounding = 5
 
     # Change transparency of focused and unfocused windows
+    active_opacity = 0.9
+    inactive_opacity = 0.8
 
 
     # https://wiki.hyprland.org/Configuring/Variables/#blur
+    blur {
+        enabled = true
+        size = 15
+        passes = 1
+        
+        vibrancy = 0.1696
+    }
 }
 
 # https://wiki.hyprland.org/Configuring/Variables/#animations
@@ -93,12 +101,12 @@ animations {
 
     bezier = myBezier, 0.05, 0.9, 0.1, 1.05
 
-    animation = windows, 1, 3, myBezier
-    animation = windowsOut, 1, 3, default, popin 80%
+    animation = windows, 1, 7, myBezier
+    animation = windowsOut, 1, 7, default, popin 80%
     animation = border, 1, 10, default
     animation = borderangle, 1, 8, default
-    animation = fade, 1, 3, default
-    animation = workspaces, 1, 4, default
+    animation = fade, 1, 7, default
+    animation = workspaces, 1, 6, default
 }
 
 # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
@@ -116,7 +124,6 @@ master {
 misc { 
     force_default_wallpaper = 1 # Set to 0 or 1 to disable the anime mascot wallpapers
     disable_hyprland_logo = false # If true disables the random hyprland logo / anime girl background. :(
-	enable_anr_dialog = false
 }
 
 
@@ -129,7 +136,7 @@ input {
     kb_layout = us,ir
     kb_variant = , 
     kb_model =
-    kb_options = caps:none#fkeys:basic_13-24
+    kb_options =
     kb_rules =
 
     follow_mouse = 1
@@ -141,6 +148,10 @@ input {
     }
 }
 
+# https://wiki.hyprland.org/Configuring/Variables/#gestures
+gestures {
+    workspace_swipe = false
+}
 
 # Example per-device config
 # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
@@ -164,6 +175,7 @@ debug {
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 bind = CTRL ALT, T, exec, $terminal
+bind = ALT, F4, killactive,
 bind = SUPER, C, killactive,
 bind = SUPER, M, exit,
 bind = SUPER, E, exec, $fileManager
@@ -172,17 +184,12 @@ bindr = SUPER, Super_L, exec, $menu
 bind = SUPER, P, pseudo, # dwindle
 bind = SUPER, J, togglesplit, # dwindle
 bind = SUPER, SPACE, exec, $switchkeyboard
-#bind = ALT, Shift_L, exec, $switchkeyboard
+bind = ALT, Shift_L, exec, $switchkeyboard
 bind = SUPER SHIFT, S, exec, $screenshot
-bind = , Print, exec, $screenprint
 bind = SUPER, F11, fullscreen
-bind = SUPER, F4, exec, hyprctl reload 
 # Restarting hypridle when it's broken.
 bind = SUPER, I, exec, pkill hypridle
 bind = SUPER SHIFT, I, exec, pkill hypridle; hypridle
-bind = SUPER, B, exec, bongocat --toggle
-bind =  , VoidSymbol, exec, ~/.local/bin/capslock.sh
-
 
 bind = SUPER, left, movefocus, l
 bind = SUPER, right, movefocus, r
@@ -234,8 +241,6 @@ bind = SUPER, mouse_up, workspace, e-1
 bindm = SUPER, mouse:272, movewindow
 bindm = SUPER, mouse:273, resizewindow
 
-#OBS
-bind = CTRL, F10, pass, class:^(com\.obsproject\.Studio)$
 ##############################
 ### WINDOWS AND WORKSPACES ###
 ##############################
